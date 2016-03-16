@@ -98,7 +98,10 @@ func sendNotification(props []map[string]interface{}) {
 func loadProperties(url string) map[string]map[string]interface{} {
 	results := make(map[string]map[string]interface{})
 
+	fmt.Printf("Getting url %v\n", url)
 	resp, err := http.Get(url)
+	fmt.Println("Got response")
+
 	if err != nil {
 		fmt.Printf("Error performing request: %v", err)
 		return nil
