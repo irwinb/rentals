@@ -109,18 +109,21 @@ func loadProperties(url string) map[string]map[string]interface{} {
 
 	fmt.Println("1")
 	var result []interface{}
+	fmt.Println("2")
 	dec := json.NewDecoder(resp.Body)
+	fmt.Println("3")
 	if err = dec.Decode(&result); err != nil {
+		fmt.Println("4")
 		if err != io.EOF {
+			fmt.Println("5")
 			fmt.Printf("Error decoding response: %v\n", err)
 			return nil
 		}
 	}
-	fmt.Println("2")
 
+	fmt.Println("6")
 	properties := result[0].([]interface{})
 	clusters := make([]string, 0)
-	fmt.Println("3")
 
 	for _, val := range properties {
 		prop := val.(map[string]interface{})
@@ -130,17 +133,14 @@ func loadProperties(url string) map[string]map[string]interface{} {
 		}
 		results[prop["PostingID"].(string)] = prop
 	}
-	fmt.Println("4")
 
 	wg := sync.WaitGroup{}
 	wg.Add(len(clusters))
-	fmt.Println("5")
 
 	mutex := sync.Mutex{}
 
 	for _, cluster := range clusters {
 		go func() {
-			fmt.Println("7")
 			defer wg.Done()
 			props := loadProperties(baseClusterUrl + cluster)
 
@@ -154,7 +154,6 @@ func loadProperties(url string) map[string]map[string]interface{} {
 		}()
 	}
 
-	fmt.Println("6")
 	wg.Wait()
 
 	return results
