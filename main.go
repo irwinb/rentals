@@ -17,8 +17,11 @@ var baseClusterUrl = "https://vancouver.craigslist.ca"
 var sg = sendgrid.NewSendGridClientWithApiKey("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")
 
 func main() {
+	fmt.Println("Loading initial properties.")
 	lastResults := loadProperties(url)
+	fmt.Println("Done loading initial properties.")
 	for {
+		fmt.Println("Waiting 5 minutes...")
 		time.Sleep(5 * time.Minute)
 
 		newResults := loadProperties(url)
