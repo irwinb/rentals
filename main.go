@@ -14,7 +14,7 @@ import (
 var url = "https://vancouver.craigslist.ca/jsonsearch/apa/?postedToday=1&max_price=2000"
 var baseClusterUrl = "https://vancouver.craigslist.ca"
 
-var sg = sendgrid.NewSendGridClientWithApiKey("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")
+var sg = sendgrid.NewSendGridClientWithApiKey("your sendgrid apikey.")
 
 func main() {
 	fmt.Println("Loading initial properties.")
